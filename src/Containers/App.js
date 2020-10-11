@@ -40,7 +40,20 @@ class App extends React.Component {
     category: "All"
   }
 
-  clickHandler = e => {
+  deleteClickHandler = taskObj => {
+      const currentState = [...this.state.tasks]
+      const filtered = currentState.filter(task => {
+          return task.text !== taskObj.text
+      })
+      this.setState({tasks: filtered})
+  }
+
+  newTaskSubmitHandler = taskObj => {
+      const newArr = [...this.state.tasks, taskObj]
+      this.setState({tasks: newArr })
+  }
+
+  categoryClickHandler = e => {
     const prevCategory = this.state.category
     const allButtons = document.querySelectorAll('button')
     for(let button of allButtons){
@@ -56,8 +69,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <h2>My tasks</h2>
-        < CategoriesForm clickHandler={this.clickHandler} />
-        <TasksContainer tasks={this.state.tasks} category={this.state.category} />
+        < CategoriesForm clickHandler={this.categoryClickHandler} />
+        <TasksContainer deleteClickHandler={this.deleteClickHandler} tasks={this.state.tasks} category={this.state.category} submitHandler={this.newTaskSubmitHandler}/>
       </div>
     );
   }

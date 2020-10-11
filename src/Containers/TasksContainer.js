@@ -1,11 +1,13 @@
 import React from 'react';
 import {Task} from '../Components/Task';
+import NewTaskForm from '../Components/NewTaskForm'
+
 function TasksContainer(props) {
 
 	const renderTasks = (category) => {
         if(category === 'All'){
            return props.tasks.map((task, index) => {
-                return <Task key={index} task={task} />;
+                return <Task deleteClickHandler={props.deleteClickHandler}key={index} task={task} />;
             })
         } 
         else {
@@ -21,6 +23,7 @@ function TasksContainer(props) {
 	return (
 		<div className="tasks">
 			<h5>Tasks</h5>
+            <NewTaskForm submitHandler={props.submitHandler}/>
 			<div>{renderTasks(props.category)}</div>
 		</div>
 	);
