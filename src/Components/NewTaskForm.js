@@ -24,6 +24,7 @@ class NewTaskForm extends React.Component {
         this.props.submitHandler(this.state)
         this.setState({
             text:"",
+            category: "Code"
         })
     }
 
@@ -31,7 +32,7 @@ class NewTaskForm extends React.Component {
 		return (
 			<form onSubmit={this.localSubmitHandler}className="new-task-form">
 				<input type="text" placeholder="New task details" value={this.state.text} onChange={this.textArea}/>
-                <select onChange={this.dropDown}>
+                <select value={this.state.category}onChange={this.dropDown}>
                     <option>Code</option>
                     <option>Food</option>
                     <option>Money</option>

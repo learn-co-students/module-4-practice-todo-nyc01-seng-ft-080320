@@ -49,8 +49,10 @@ class App extends React.Component {
   }
 
   newTaskSubmitHandler = taskObj => {
+      if(taskObj.text !== ''){
       const newArr = [...this.state.tasks, taskObj]
       this.setState({tasks: newArr })
+      }
   }
 
   categoryClickHandler = e => {
