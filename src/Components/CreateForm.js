@@ -12,8 +12,9 @@ class CreateForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let formData = this.state
+    const formData = this.state
     this.props.appHandleSubmit(formData)
+    this.setState({text: '', category: this.props.categories[0]})
   }
 
   listCategories = () => {
@@ -23,7 +24,7 @@ class CreateForm extends React.Component {
   render() {
     return (
       <form class="new-task-form" onSubmit={this.handleSubmit}>
-        <input type="text" onChange={this.handleChange} name="text" placeholder="New task details" value={this.state.task} />
+        <input type="text" onChange={this.handleChange} name="text" placeholder="New task details" value={this.state.text} />
         <select name="category" onChange={this.handleChange}>{this.listCategories()}</select>
         <input type="submit" value="Add Task" />
       </form>
