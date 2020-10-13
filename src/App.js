@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { CATEGORIES } from './data'
+import CategoriesContainer from './containers/CategoriesContainer'
 
 class App extends React.Component {
 
@@ -41,6 +42,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <h2>My tasks</h2>
+        <CategoriesContainer categories={CATEGORIES} />
       </div>
     );
   }
