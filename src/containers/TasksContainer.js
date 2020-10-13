@@ -3,7 +3,7 @@ import Task from '../components/Task'
 
 class TasksContainer extends React.Component {
     renderTasks = () => {
-        return this.props.tasks.map(taskObj => <Task task={taskObj} />)
+        return this.props.tasks.map(taskObj => <Task task={taskObj} deleteHandler={this.props.deleteHandler}/>)
     }
 
     render() {

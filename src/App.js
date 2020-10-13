@@ -52,12 +52,19 @@ class App extends React.Component {
         }
     }
 
+    deleteTask = (taskObj) => {
+        const newArray = [...this.state.tasks]
+        const index = newArray.findIndex(task => task.text === taskObj.text)
+        newArray.splice(index, 1)
+        this.setState({tasks: newArray})
+    }
+
   render() {
     return (
       <div className="App">
         <h2>My tasks</h2>
         <CategoriesContainer categories={CATEGORIES} clickHandler={this.clickHandler} selected={this.state.selected}/>
-        <TasksContainer tasks={this.filterTasks()}/>
+        <TasksContainer tasks={this.filterTasks()} deleteHandler={this.deleteTask}/>
       </div>
     );
   }
