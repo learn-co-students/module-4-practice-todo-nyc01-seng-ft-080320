@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { CATEGORIES } from './data'
 import CategoriesContainer from './containers/CategoriesContainer'
+import TasksContainer from './containers/TasksContainer'
 
 class App extends React.Component {
 
@@ -43,6 +44,7 @@ class App extends React.Component {
       <div className="App">
         <h2>My tasks</h2>
         <CategoriesContainer categories={CATEGORIES} />
+        <TasksContainer tasks={this.state.tasks}/>
       </div>
     );
   }
