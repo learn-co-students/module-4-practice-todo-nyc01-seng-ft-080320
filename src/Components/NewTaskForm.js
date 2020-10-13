@@ -7,15 +7,21 @@ class NewTaskForm extends React.Component {
         category: "Code"
     }
 
-    dropDown = (e) => {
-       this.setState({
-           category: e.target.value
-       })
-    }
+    // dropDown = (e) => {
+    //    this.setState({
+    //        category: e.target.value
+    //    })
+    // }
 
-    textArea = (e) => {
+    // textArea = (e) => {
+    //     this.setState({
+    //         text: e.target.value
+    //     })
+    // }
+
+    changeHandler = e => {
         this.setState({
-            text: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -31,8 +37,8 @@ class NewTaskForm extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.localSubmitHandler}className="new-task-form">
-				<input type="text" placeholder="New task details" value={this.state.text} onChange={this.textArea}/>
-                <select value={this.state.category}onChange={this.dropDown}>
+				<input name="text" type="text" placeholder="New task details" value={this.state.text} onChange={this.changeHandler}/>
+                <select name="category"value={this.state.category}onChange={this.changeHandler}>
                     <option>Code</option>
                     <option>Food</option>
                     <option>Money</option>

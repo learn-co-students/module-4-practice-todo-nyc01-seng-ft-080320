@@ -1,32 +1,51 @@
 import React from 'react';
-import {Task} from '../Components/Task';
-import NewTaskForm from '../Components/NewTaskForm'
+import { Task } from '../Components/Task';
+import NewTaskForm from '../Components/NewTaskForm';
+import SearchBar from '../Components/SearchBar';
+import { EditTaskForm } from '../Components/EditTaskForm';
 
-function TasksContainer(props) {
+class TasksContainer extends React.Component {
+	state = {
+		searchTerm: ''
+	};
 
-	const renderTasks = (category) => {
-        if(category === 'All'){
-           return props.tasks.map((task, index) => {
-                return <Task deleteClickHandler={props.deleteClickHandler}key={index} task={task} />;
+	renderTasks = (category) => {
+		if (category === 'All') {
+            const searched = this.props.tasks.filter(task => {
+                return task.text.toLowerCase().includes(this.state.searchTerm.toLowerCase())
             })
-        } 
-        else {
-        const filtered = props.tasks.filter(task => {
-            return task.category === category
-        })
+			return  searched.map((task, index) => {
+				return <Task editHandler={this.props.editHandler} deleteClickHandler={this.props.deleteClickHandler} key={index} task={task} />;
+			});
+		} else {
+			const filtered = this.props.tasks.filter((task) => {
+				return task.category === category;
+			});
+            const searched = filtered.filter(task => {
+               return task.text.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+            })
+			return searched.map((task, index) => {
+				return <Task editHandler={this.props.editHandler} deleteClickHandler={this.props.deleteClickHandler} key={index} task={task} />;
+			});
+		}
+	};
 
-		return filtered.map((task, index) => {
-			return <Task key={index} task={task} />;
-        });
-    }
-    };
-	return (
-		<div className="tasks">
-			<h5>Tasks</h5>
-            <NewTaskForm submitHandler={props.submitHandler}/>
-			<div>{renderTasks(props.category)}</div>
-		</div>
-	);
+	searchHandler = (e) => {
+		this.setState({
+			searchTerm: e.target.value
+		});
+	};
+	render() {
+		return (
+			<div className="tasks">
+				<h5>Tasks</h5>
+				<SearchBar searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} />
+                {this.props.showEdit? <EditTaskForm submitHandler={this.props.editSubmitHandler}changeHandler={this.props.changeHandlerForEdit}task={this.props.taskToEdit}/>: null}
+				<NewTaskForm submitHandler={this.props.submitHandler} />
+				<div>{this.renderTasks(this.props.category)}</div>
+			</div>
+		);
+	}
 }
 
 export default TasksContainer;

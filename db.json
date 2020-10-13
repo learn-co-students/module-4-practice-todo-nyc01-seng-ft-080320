@@ -1,18 +1,13 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "text": "Buy rice",
-      "category": "Food"
-    },
-    {
       "id": 2,
-      "text": "Save a tenner",
+      "text": "Save a tenner!!!!!",
       "category": "Money"
     },
     {
       "id": 3,
-      "text": "Build a todo app",
+      "text": "Build a todo app!",
       "category": "Code"
     },
     {
@@ -34,11 +29,6 @@
       "id": 7,
       "text": "Tidy house",
       "category": "Misc"
-    },
-    {
-      "text": "lj",
-      "category": "Code",
-      "id": 8
     }
   ]
 }
