@@ -59,15 +59,27 @@ class App extends React.Component {
         this.setState({tasks: newArray})
     }
 
-  render() {
-    return (
-      <div className="App">
-        <h2>My tasks</h2>
-        <CategoriesContainer categories={CATEGORIES} clickHandler={this.clickHandler} selected={this.state.selected}/>
-        <TasksContainer tasks={this.filterTasks()} deleteHandler={this.deleteTask}/>
-      </div>
-    );
-  }
+    addTask = (taskObj) => {
+        this.setState(prevState => {
+            return {
+                tasks: [taskObj, ...prevState.tasks]
+            }
+        })
+    }
+
+    render() {
+        return (
+        <div className="App">
+            <h2>My tasks</h2>
+            <CategoriesContainer categories={CATEGORIES} clickHandler={this.clickHandler} selected={this.state.selected}/>
+            <TasksContainer tasks={this.filterTasks()} 
+                deleteHandler={this.deleteTask} 
+                categories={CATEGORIES.slice(1)}
+                addTask={this.addTask}
+            />
+        </div>
+        );
+    }
 }
 
 
