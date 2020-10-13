@@ -45,7 +45,6 @@ class App extends React.Component {
 
   //no real identifier available without shenanigans, so this will delete duplicates (just like the demo...)
   deleteTask = (deletedTask) => {
-    console.log(deletedTask.text)
     let newTaskList = [...this.state.tasks]
     let taskIndex = newTaskList.findIndex(task => task.text === deletedTask.text)
     console.log(taskIndex)
@@ -53,12 +52,21 @@ class App extends React.Component {
     this.setState({tasks: newTaskList})
   }
 
+  addTask = (addedTask) => {
+    console.log("in addTask() at APP")
+    this.setState(prevState => {
+      return {
+        tasks: [...prevState.tasks, addedTask]
+      }
+    })
+  }
+
 
   render() {
     return (
       <div className="App">
         <h2>My tasks</h2>
-        <TasksContainer categories={CATEGORIES} selected={this.state.selected} changeCategory={this.changeCategory} tasks={this.state.tasks} deleteTask={this.deleteTask}/>
+        <TasksContainer categories={CATEGORIES} selected={this.state.selected} changeCategory={this.changeCategory} tasks={this.state.tasks} deleteTask={this.deleteTask} addTask={this.addTask}/>
       </div>
     );
   }

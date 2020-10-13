@@ -1,5 +1,6 @@
 import React from 'react'
 import Task from '../Components/Task'
+import TaskForm from '../Components/TaskForm'
 import CategoriesContainer from './CategoriesContainer'
 
 class TasksContainer extends React.Component {
@@ -19,6 +20,7 @@ class TasksContainer extends React.Component {
                 <CategoriesContainer categories={this.props.categories} selected={this.props.selected} changeCategory={this.props.changeCategory}/>
                 <div className="tasks">
                     <h5>Tasks</h5>
+                    <TaskForm addTask={this.props.addTask} categories={this.props.categories}/>
                     {this.renderTasks()}
                 </div>
             </React.Fragment>
