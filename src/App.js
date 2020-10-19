@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
-import { CATEGORIES } from './data'
+import { CATEGORIES } from './data';
+import CategoryContainer from './Containers/CategoryContainer';
+import TaskContainer from './Containers/TaskContainer';
 
 class App extends React.Component {
 
@@ -34,13 +36,32 @@ class App extends React.Component {
         text: 'Tidy house',
         category: 'Misc'
       }
-    ]
+    ],
+    category: 'All'
+  }
+
+  appHandleClick = category => {
+    this.setState({category: category})
+  }
+
+  appHandleSubmit = formData => {
+    this.setState(prev => ({
+      tasks: [...prev.tasks, formData]
+    }))
+  }
+
+  appHandleDelete = task => {
+    this.setState(prev => ({
+      tasks: prev.tasks.filter(stateTask => { return task !== stateTask })
+    }))
   }
 
   render() {
     return (
       <div className="App">
         <h2>My tasks</h2>
+        <CategoryContainer categories={CATEGORIES} selected={this.state.category} appHandleClick={this.appHandleClick} />
+        <TaskContainer appHandleDelete={this.appHandleDelete} appHandleSubmit={this.appHandleSubmit} categories={CATEGORIES} tasks={this.state.tasks} selected={this.state.category} />
       </div>
     );
   }
